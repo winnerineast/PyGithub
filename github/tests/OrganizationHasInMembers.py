@@ -2,9 +2,8 @@
 
 # ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2012 Zearin <zearin@gonk.net>                                      #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
+# Copyright 2016 Sam Corbett <sjcorbett@apache.org>                            #
 #                                                                              #
 # This file is part of PyGithub.                                               #
 # http://pygithub.github.io/PyGithub/v1/index.html                             #
@@ -24,28 +23,15 @@
 #                                                                              #
 # ##############################################################################
 
-"""
-The primary class you will instanciate is :class:`github.MainClass.Github`.
-From its ``get_``, ``create_`` methods, you will obtain instances of all Github objects
-like :class:`github.NamedUser.NamedUser` or :class:`github.Repository.Repository`.
-
-All classes inherit from :class:`github.GithubObject.GithubObject`.
-"""
-
-import logging
-
-from MainClass import Github, GithubIntegration
-from GithubException import GithubException, BadCredentialsException, UnknownObjectException, BadUserAgentException, RateLimitExceededException, BadAttributeException
-from InputFileContent import InputFileContent
-from InputGitAuthor import InputGitAuthor
-from InputGitTreeElement import InputGitTreeElement
+import Framework
 
 
-def enable_console_debug_logging():  # pragma no cover (Function useful only outside test environment)
-    """
-    This function sets up a very simple logging configuration (log everything on standard output) that is useful for troubleshooting.
-    """
+class OrganizationHasInMembers(Framework.TestCase):
+    def setUp(self):
+        Framework.TestCase.setUp(self)
+        self.user = self.g.get_user("meneal")
+        self.org = self.g.get_organization("RobotWithFeelings")
+        self.has_in_members = self.org.has_in_members(self.user)
 
-    logger = logging.getLogger("github")
-    logger.setLevel(logging.DEBUG)
-    logger.addHandler(logging.StreamHandler())
+    def testHasInMembers(self):
+        self.assertTrue(self.has_in_members)

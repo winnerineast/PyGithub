@@ -22,8 +22,11 @@ g = Github("user", "password")
 # Then play with your Github objects:
 for repo in g.get_user().get_repos():
     print repo.name
-    repo.edit(has_wiki=False)
 ```
+
+## Documentation
+
+More information can be found on the [PyGitHub documentation site.](http://pygithub.readthedocs.io/en/latest/introduction.html)
 
 ## Development
 

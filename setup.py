@@ -28,7 +28,7 @@
 import setuptools
 import textwrap
 
-version = "1.29"
+version = "1.32"
 
 
 if __name__ == "__main__":
@@ -88,8 +88,13 @@ if __name__ == "__main__":
             "Programming Language :: Python :: 3",
             "Programming Language :: Python :: 3.2",
             "Programming Language :: Python :: 3.3",
+            "Programming Language :: Python :: 3.4",
+            "Programming Language :: Python :: 3.5",
             "Topic :: Software Development",
         ],
         test_suite="github.tests.AllTests",
-        use_2to3=True
+        use_2to3=True,
+        install_requires=[
+            "python-jose"
+        ]
     )
